@@ -1,0 +1,27 @@
+# Last updated: 9/23/2026, 7:17:02 PM
+1class Solution:
+2    def isBipartite(self, graph: list[list[int]]) -> bool:
+3        odd=[0]*len(graph) #mapping index i to even=-1,odd=1 values
+4        def bfs(i):
+5            if odd[i]:
+6                return True
+7            q=deque([i])
+8            odd[i]=-1
+9            while q:
+10                i=q.popleft()
+11                for nei in graph[i]:
+12                    if odd[i]==odd[nei]:
+13                        return False
+14                    elif not odd[nei]:
+15                        q.append(nei)
+16                        odd[nei]=-1*odd[i]
+17            return True
+18        
+19        for i in range(len(graph)):
+20            if not bfs(i):
+21                return False
+22        return True
+23
+24
+25            
+26
